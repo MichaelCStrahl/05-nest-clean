@@ -3,7 +3,7 @@ import { Question } from '../../enterprise/entities/question'
 import { UniqueEntityID } from '../../enterprise/entities/value-objects/unique-entity-id'
 import { QuestionsRepository } from '../repositories/questions-repository'
 import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
-import { QuestionAttachmentList } from '../../enterprise/entities/question-attatchment-list'
+import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
 
 interface CreateQuestionUseCaseRequest {
   authorId: string
