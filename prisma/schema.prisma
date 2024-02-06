@@ -58,21 +58,21 @@ model Answer {
 
   author       User         @relation(fields: [authorId], references: [id])
   bestAnswerOn Question?    @relation("bestAnswer")
-  Question     Question     @relation(fields: [questionId], references: [id])
+  question     Question     @relation(fields: [questionId], references: [id])
   comments     Comment[]
   attachments  Attachment[]
 
-  @@map("answer")
+  @@map("answers")
 }
 
 model Comment {
   id         String    @id @default(uuid())
   content    String
-  createdAt  DateTime  @default(now()) @map("created_at")
-  updatedAt  DateTime? @updatedAt @map("updated_at")
   authorId   String    @map("author_id")
   questionId String?   @map("question_id")
   answerId   String?   @map("answer_id")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
 
   question Question? @relation(fields: [questionId], references: [id])
   answer   Answer?   @relation(fields: [answerId], references: [id])
@@ -82,10 +82,9 @@ model Comment {
 }
 
 model Attachment {
-  id    String @id @default(uuid())
-  title String
-  url   String
-
+  id         String  @id @default(uuid())
+  title      String
+  url        String
   questionId String? @map("question_id")
   answerId   String? @map("answer_id")
 
