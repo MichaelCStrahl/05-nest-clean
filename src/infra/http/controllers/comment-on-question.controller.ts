@@ -19,7 +19,7 @@ type CommentOnQuestionBodySchema = z.infer<typeof commentOnQuestionBodySchema>
 
 const bodyValidationPipe = new ZodValidationPipe(commentOnQuestionBodySchema)
 
-@Controller('/questions/:questionsId/comments')
+@Controller('/questions/:questionId/comments')
 export class CommentOnQuestionController {
   constructor(private commentOnQuestion: CommentOnQuestionUseCase) {}
 
@@ -27,7 +27,7 @@ export class CommentOnQuestionController {
   async handle(
     @Body(bodyValidationPipe) body: CommentOnQuestionBodySchema,
     @CurrentUser() user: UserPayload,
-    @Param('questionsId') questionId: string,
+    @Param('questionId') questionId: string,
   ) {
     const { content } = body
 
