@@ -14,10 +14,22 @@ export class InMemoryQuestionAttachmentsRepository
     return questionAttachments
   }
 
+  async createMany(attachments: QuestionAttachment[]) {
+    this.items.push(...attachments)
+  }
+
   async deleteManyByQuestionId(questionId: string) {
     const questionAttachments = this.items.filter(
       (item) => item.questionId.toString() !== questionId,
     )
+
+    this.items = questionAttachments
+  }
+
+  async deleteMany(attachments: QuestionAttachment[]) {
+    const questionAttachments = this.items.filter((item) => {
+      return !attachments.some((attachment) => attachment.equals(item))
+    })
 
     this.items = questionAttachments
   }
